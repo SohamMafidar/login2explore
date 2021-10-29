@@ -9,8 +9,8 @@ http://login2explore.com/jpdb/docs.html
 ![LX2](https://user-images.githubusercontent.com/66075716/139423949-78979504-44dc-4fb5-97c4-184e328338f8.JPG)
 
 ## **Benefits of JBDB**
-*It has a very simple way to retrieve data in a JSON format.
-*Schema-free, Simple to use database.
+* It has a very simple way to retrieve data in a JSON format.
+* Schema-free, Simple to use database.
 
 ### *Released project on (29-10-21)*
 
