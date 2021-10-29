@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="en">
+
+<head>
+    <title>Login2Explore</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="http://login2explore.com/jpdb/resources/js/0.0.3/jpdb-commons.js"></script>
+</head>
+<body>
+    <style>
+        body {background-color: powderblue;}
+    </style>
+    <div class="container">
+        <h2>Forms</h2>
+        <form id="empForm" method="post">
+            <div class="form-group">
+                <span><label for="id">Employee ID:</label> <label id="idMsg">
+                    </label></span>
+                <input type="text" class="form-control" name="id" id="id" placeholder="Enter Employee ID"
+                    required>
+            </div>
+            <div class="form-group">
+                <label for="name">Employee Name:</label>
+                <input type="text" class="form-control" id="name" placeholder="Enter Employee Name" name="name">
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter Employee Email"
+                    name="email">
+            </div>
+            <input type="button" class="btn btn-primary" id="empSave" value="Save" onclick="saveEmployee();">
+        </form>
+    </div>
+
+    <script>
+        function validateAndGetFormData() {
+            // empIdVar stores value of employee id
+            var idVar = $("#id").val();
+            if (idVar === "") {
+                alert("Employee ID Required Value");
+                $("#id").focus();
+                return "";
+            }
+            var nameVar = $("#name").val();
+            if (nameVar === "") {
+                alert("Employee Name is Required Value");
+                $("#name").focus();
+                return "";
+            }
+            var emailVar = $("#email").val();
+            if (emailVar === "") {
+                alert("Employee Email is Required Value");
+                $("#email").focus();
+                return "";
+            }
+            var jsonStrObj = {
+                id: idVar,
+                name: nameVar,
+                email: emailVar
+            };
+            // converts object into string
+            return JSON.stringify(jsonStrObj);
+        }
+
+        function resetForm() {
+            $("#id").val("")
+            $("#name").val("");
+            $("#email").val("");
+            $("#id").focus();
+        }
+
+        function saveEmployee() {
+            // Validates Form data
+            var jsonStr = validateAndGetFormData();
+            //  If data is not found it returns empty string
+            if (jsonStr === "") {
+                return;
+            }
+            var putReqStr = createPUTRequest("90936081|-31948820580141302|90944468",
+                jsonStr, "Employee", "Emp-Rel");
+            alert(putReqStr);
+            // We have to turn off async beacuse multiple ajax request may hamper page
+
+            jQuery.ajaxSetup({ async: false });
+            // Executes request at this url
+            var resultObj = executeCommandAtGivenBaseUrl(putReqStr,
+                "http://api.login2explore.com:5577", "/api/iml");
+            jQuery.ajaxSetup({ async: true });
+            alert(JSON.stringify(resultObj));
+            resetForm();
+        }
+
+    </script>
+</body>
+
+</html>
