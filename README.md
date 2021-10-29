@@ -1,6 +1,5 @@
 # **Form Submission in JsonPowerDB** 
-
-JsonPowerDb is a Rest API based Multimode database(supporting Document Db, Key-value Db, RDBMS etc)
+JsonPowerDB is a Real-time, High Performance,Simple to Use, Rest API based Multi-mode DBMS(supporting Document Db, Key-value Db, RDBMS etc)
 http://login2explore.com/jpdb/docs.html
 
 ### The DBMS looks like this
